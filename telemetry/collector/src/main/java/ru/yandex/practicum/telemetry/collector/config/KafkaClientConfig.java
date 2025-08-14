@@ -33,16 +33,21 @@ public class KafkaClientConfig {
 
             @Override
             public void send(String topic, Long timestamp, String hubId, SpecificRecordBase event) {
-                ProducerRecord<String, SpecificRecordBase> record = new ProducerRecord<>(topic, null, timestamp, hubId,
-                        event);
-                Future<RecordMetadata> recordMetadataFuture = kafkaProducer.send(record);
+                kafkaProducer.send(new ProducerRecord<>(topic, null, timestamp, hubId, event));
+                kafkaProducer.flush();
             }
 
             @Override
             public void close() {
-                kafkaProducer.flush();
-                kafkaProducer.close(Duration.ofSeconds(10));
+                try {
+                    kafkaProducer.flush();
+                } finally {
+                    kafkaProducer.close(Duration.ofSeconds(10));
+                }
             }
+
+            @Override
+            public void flush() { kafkaProducer.flush(); }
         };
     }
 }
