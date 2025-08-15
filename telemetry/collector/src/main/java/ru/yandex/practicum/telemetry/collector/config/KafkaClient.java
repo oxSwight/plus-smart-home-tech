@@ -7,6 +7,4 @@ public interface KafkaClient extends AutoCloseable {
 
     default void flush(){};
 
-    @Override
-    void close();
 }
