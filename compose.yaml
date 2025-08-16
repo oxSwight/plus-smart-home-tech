@@ -21,6 +21,35 @@ services:
   kafka-init-topics:
     image: confluentinc/confluent-local:7.4.3
     depends_on:
+
+      - kafka
+    command: "bash -c \
+                'kafka-topics --create --topic telemetry.sensors.v1 \
+                             --partitions 1 --replication-factor 1 --if-not-exists \
+                             --bootstrap-server kafka:29092 && \
+                kafka-topics --create --topic telemetry.snapshots.v1 \
+                             --partitions 1 --replication-factor 1 --if-not-exists \
+                             --bootstrap-server kafka:29092 && \
+                kafka-topics --create --topic telemetry.hubs.v1 \
+                             --partitions 1 --replication-factor 1 --if-not-exists \
+                             --bootstrap-server kafka:29092'"
+    init: true
+
+  db:
+    image: postgres:16.1
+    container_name: postgres-analyzer-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=analyzer
+      - POSTGRES_PASSWORD=analyzer
+      - POSTGRES_DB=analyzer
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 5s
+      interval: 5s
+      retries: 10
+=======
       kafka:
         condition: service_healthy
     command: >
@@ -30,4 +59,3 @@ services:
         kafka-topics --create --topic telemetry.snapshots.v1 --partitions 1 --replication-factor 1 --if-not-exists --bootstrap-server kafka:29092
       "
     init: true
-
