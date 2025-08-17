@@ -25,7 +25,6 @@ public class HubEventProcessor implements Runnable {
 
     private final Consumer<String, HubEventAvro> consumer;
     private final HubHandler hubHandler;
-    private final Producer<String, SpecificRecord> producer;
 
     @Value("${topic.hub-event-topic}")
     private String topic;
@@ -50,7 +49,6 @@ public class HubEventProcessor implements Runnable {
                         throw new IllegalArgumentException("Нет обработчика для события " + event);
                     }
                 }
-                producer.flush();
                 consumer.commitSync();
             }
         } catch (WakeupException ignored) {
