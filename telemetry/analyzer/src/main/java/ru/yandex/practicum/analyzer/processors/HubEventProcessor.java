@@ -2,9 +2,11 @@ package ru.yandex.practicum.analyzer.processors;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ public class HubEventProcessor implements Runnable {
 
     private final Consumer<String, HubEventAvro> consumer;
     private final HubHandler hubHandler;
+    private final Producer<String, SpecificRecord> producer;
 
     @Value("${topic.hub-event-topic}")
     private String topic;
@@ -47,6 +50,7 @@ public class HubEventProcessor implements Runnable {
                         throw new IllegalArgumentException("Нет обработчика для события " + event);
                     }
                 }
+                producer.flush();
                 consumer.commitSync();
             }
         } catch (WakeupException ignored) {

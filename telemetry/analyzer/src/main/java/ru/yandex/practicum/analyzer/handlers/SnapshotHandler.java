@@ -34,7 +34,7 @@ public class SnapshotHandler {
 
     private boolean handleScenario(Scenario scenario, Map<String, SensorStateAvro> sensorStateMap) {
         List<Condition> conditions = conditionRepository.findAllByScenario(scenario);
-        return conditions.stream().noneMatch(condition -> !checkCondition(condition, sensorStateMap));
+        return conditions.stream().allMatch(condition -> checkCondition(condition, sensorStateMap));
     }
 
     private boolean checkCondition(Condition condition, Map<String, SensorStateAvro> sensorStateMap) {
