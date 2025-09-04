@@ -1,5 +1,20 @@
 # Telemetry Analyzer 🚀
 
+---
+
+## 🛠 Tech Stack
+- **Backend:** Java 17, Spring Boot (Web, Data JPA, Security, Actuator)
+- **Database:** PostgreSQL (optimized queries, indexes)
+- **Security:** Spring Security (RBAC)
+- **API:** REST, OpenAPI/Swagger
+- **Infrastructure:** Docker, Docker Compose, CI/CD pipelines
+- **Monitoring:** Micrometer, Prometheus, Grafana
+- **Testing:** JUnit, Mockito
+- **Utilities:** Lombok, Logging, Exception Handling
+- **Concurrency:** Multi-threading, async processing
+
+
+---
 Event-driven microservice built with **Java 17 + Spring Boot** for processing telemetry data in real time.  
 The system integrates **Apache Kafka**, **gRPC** and **PostgreSQL**, and is fully tested with **JUnit5, Mockito and Testcontainers**.
 
