@@ -3,9 +3,6 @@ package ru.yandex.practicum.shoppingstore.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.yandex.practicum.enums.ProductCategory;
-import ru.yandex.practicum.enums.ProductState;
-import ru.yandex.practicum.enums.QuantityState;
 
 import java.util.UUID;
 
@@ -19,29 +16,29 @@ import java.util.UUID;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "product_id", updatable = false, nullable = false)
     UUID productId;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name", nullable = false)
     String productName;
+
+    @Column(nullable = false)
     String description;
 
     @Column(name = "image_src")
     String imageSrc;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "quantity_state")
-    QuantityState quantityState;
+    @Column(name = "quantity_state", nullable = false)
+    String quantityState;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "product_state")
-    ProductState productState;
+    @Column(name = "product_state", nullable = false)
+    String productState;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "product_category")
-    ProductCategory productCategory;
+    @Column(name = "product_category", nullable = false)
+    String productCategory;
 
     double price;
     int rating;
