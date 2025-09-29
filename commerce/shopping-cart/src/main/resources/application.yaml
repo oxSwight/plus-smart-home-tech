@@ -3,6 +3,9 @@ server:
   port: 18083
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+
   application:
     name: shopping-cart
   config:
