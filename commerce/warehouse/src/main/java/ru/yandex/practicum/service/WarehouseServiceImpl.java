@@ -85,7 +85,6 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public AddressDto getAddress() {
         String address = Address.CURRENT_ADDRESS;
         return AddressDto.builder()
