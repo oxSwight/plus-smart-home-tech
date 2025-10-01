@@ -1,7 +1,9 @@
 package ru.yandex.practicum.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,6 +21,8 @@ public class ShoppingCartDto {
     UUID shoppingCartId;
 
     @NotNull
+    @NotEmpty
     @JsonDeserialize(using = CustomMapDeserializer.class)
-    Map<UUID, Integer> products;
+    Map<@NotNull UUID, @NotNull @Positive Integer> products;
+
 }
