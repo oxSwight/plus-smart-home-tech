@@ -23,7 +23,7 @@ public class CustomMapDeserializer extends StdDeserializer<Map<UUID, Integer>> {
     }
 
     @Override
-    public Map<UUID, Integer> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Map<UUID, Integer> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         JsonNode node = jp.getCodec().readTree(jp);
         Iterator<Map.Entry<String, JsonNode>> fieldsIterator = node.fields();
         Map<UUID, Integer> map = new HashMap<>();
