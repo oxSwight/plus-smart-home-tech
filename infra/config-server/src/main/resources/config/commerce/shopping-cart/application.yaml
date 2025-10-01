@@ -4,15 +4,14 @@ server:
 spring:
   jpa:
     show-sql: false
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
-        format-sql: true
-
-  sql:
-    init:
-      mode: always
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc.time_zone: UTC
+        format_sql: true
 
   datasource:
     driverClassName: org.postgresql.Driver
