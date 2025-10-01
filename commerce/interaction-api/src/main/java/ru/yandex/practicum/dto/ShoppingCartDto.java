@@ -22,7 +22,7 @@ public class ShoppingCartDto {
 
     @NotNull
     @NotEmpty
-    @JsonDeserialize(using = CustomMapDeserializer.class)
     Map<@NotNull UUID, @NotNull @Positive Integer> products;
+
 
 }
