@@ -149,8 +149,8 @@ public class WarehouseServiceImpl implements WarehouseService {
             quantityState = QuantityState.MANY;
         }
 
-        log.error("====================================");
+        log.info("====================================");
         shoppingStoreClient.setProductQuantityState(productId, quantityState);
-        log.error("====================================");
+        log.info("====================================");
     }
 }
