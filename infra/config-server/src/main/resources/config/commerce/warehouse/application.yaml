@@ -1,3 +1,6 @@
+server:
+  port: 18081
+
 spring:
   jpa:
     show-sql: false
