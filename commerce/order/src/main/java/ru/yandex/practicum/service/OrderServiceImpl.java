@@ -26,7 +26,9 @@ import ru.yandex.practicum.model.Order;
 import ru.yandex.practicum.repository.OrderRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -59,7 +61,15 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto createNewOrder(CreateNewOrderRequest newOrderRequest) {
         Order order = Order.builder()
                 .shoppingCartId(newOrderRequest.getShoppingCart().getShoppingCartId())
-                .products(newOrderRequest.getShoppingCart().getProducts())
+                .products(
+                        newOrderRequest.getShoppingCart().getProducts()
+                                .entrySet()
+                                .stream()
+                                .collect(Collectors.toMap(
+                                        Map.Entry::getKey,
+                                        e -> e.getValue().intValue()
+                                ))
+                )
                 .state(OrderState.NEW)
                 .build();
         Order newOrder = orderRepository.save(order);
