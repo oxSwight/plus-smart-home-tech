@@ -1,3 +1,6 @@
+server:
+  port: 0
+
 spring:
   jpa:
     hibernate:
@@ -12,8 +15,8 @@ spring:
       mode: always
 
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:3432/payment-db
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/payment-db
     username: payment
     password: payment
 
