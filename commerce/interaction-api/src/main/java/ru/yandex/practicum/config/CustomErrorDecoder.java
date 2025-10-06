@@ -1,8 +1,8 @@
 package ru.yandex.practicum.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Response;
 import feign.codec.ErrorDecoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.InternalServerErrorException;
 import ru.yandex.practicum.error.ErrorResponse;
 import ru.yandex.practicum.exception.AnotherServiceBadRequestException;
