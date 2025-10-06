@@ -1,6 +1,7 @@
 package ru.yandex.practicum.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.yandex.practicum.enums.OrderState;
@@ -28,5 +29,5 @@ public class OrderDto {
     Double productPrice;
 
     @NotNull
-    Map<UUID, Long> products;
+    Map<@NotNull UUID, @NotNull @Positive Long> products;
 }
