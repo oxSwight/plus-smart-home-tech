@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.yandex.practicum.enums.DeliveryState;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -33,4 +34,16 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     DeliveryState deliveryState;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    BigDecimal deliveryCost;
+
+    @Column
+    Double deliveryWeight;
+
+    @Column
+    Double deliveryVolume;
+
+    @Column
+    Boolean fragile;
 }
