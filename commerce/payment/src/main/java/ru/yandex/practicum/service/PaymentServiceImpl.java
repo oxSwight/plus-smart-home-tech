@@ -1,6 +1,7 @@
 package ru.yandex.practicum.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.dto.OrderDto;
@@ -27,6 +28,10 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final ShoppingStoreClient shoppingStoreClient;
     private final OrderClient orderClient;
+
+    @Value("${payment.fee_ratio}")
+    private double feeRatio;
+
 
     private final String MESSAGE_NOT_INFORMATION = "Недостаточно информации в заказе для расчёта.";
     private final String MESSAGE_PAYMENT_NOT_FOUND = "Указанная оплата не найдена.";
@@ -98,6 +103,6 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private double getTax(double totalPrice) {
-        return totalPrice * 0.1;
+        return totalPrice * feeRatio;
     }
 }
