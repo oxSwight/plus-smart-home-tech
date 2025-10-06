@@ -24,7 +24,7 @@ public class DeliveryController {
             log.info("Создать новую доставку в БД {}", deliveryDto);
             return deliveryService.planDelivery(deliveryDto);
         } catch (Exception e) {
-            log.error("Ошибка создания новой доставки.");
+            log.error("Ошибка создания новой доставки.", e);
             throw e;
         }
     }
